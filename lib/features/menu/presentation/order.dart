@@ -20,7 +20,8 @@ class _OrderState extends State<Order> {
   double price = 0;
 
   void getPrice() async {
-    price = double.parse((await MenuData().getPizzaData(widget.id))["pizzaPrice"] as String);
+    price = double.parse(
+        (await MenuData().getPizzaData(widget.id))["pizzaPrice"] as String);
   }
 
   @override
@@ -124,9 +125,11 @@ class _OrderState extends State<Order> {
                                       () {
                                         checked[index] = value ?? false;
                                         if (checked[index]) {
-                                          price = (price * 1.05).roundToDouble();
+                                          price =
+                                              (price * 1.05).roundToDouble();
                                         } else {
-                                          price = (price / 1.05).roundToDouble();
+                                          price =
+                                              (price / 1.05).roundToDouble();
                                         }
                                       },
                                     );
@@ -166,8 +169,8 @@ class _OrderState extends State<Order> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            HistoryData().setHistory(data["pizzaName"],
-                                widget.id, price.toString());
+                            HistoryData().setHistory(
+                                data["pizzaName"], widget.id, price.toString());
                             Navigator.pop(context);
                           },
                           child: const Text(

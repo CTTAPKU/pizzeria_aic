@@ -29,7 +29,10 @@ class _HomeState extends State<Home> {
               return ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (context, index) {
-                  return PizzaCard(pizzaName: data[index]["pizzaName"], pictureURL: data[index]["pictureURL"], id: data[index]["id"]);
+                  return PizzaCard(
+                      pizzaName: data[index]["pizzaName"],
+                      pictureURL: data[index]["pictureURL"],
+                      id: data[index]["id"]);
                 },
               );
             } else {

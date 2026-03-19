@@ -30,12 +30,16 @@ class CustomThemeData {
             backgroundColor: AppColors.darkSecondaryBackground,
             iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((states) {
               if (states.contains(WidgetState.selected)) {
-                return const IconThemeData(color: AppColors.darkPrimaryBackground);
+                return const IconThemeData(
+                    color: AppColors.darkPrimaryBackground);
               }
               return const IconThemeData(color: AppColors.darkPrimary);
             }),
             labelTextStyle: WidgetStateProperty.all(
-              GoogleFonts.montserratAlternates(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.text),
+              GoogleFonts.montserratAlternates(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.text),
             ),
             indicatorColor: AppColors.darkAccent),
         outlinedButtonTheme: OutlinedButtonThemeData(
@@ -46,7 +50,8 @@ class CustomThemeData {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            foregroundColor: const WidgetStatePropertyAll<Color>(AppColors.darkPrimary),
+            foregroundColor:
+                const WidgetStatePropertyAll<Color>(AppColors.darkPrimary),
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -57,8 +62,10 @@ class CustomThemeData {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              foregroundColor: const WidgetStatePropertyAll<Color>(AppColors.darkPrimaryBackground),
-              backgroundColor: const WidgetStatePropertyAll<Color>(AppColors.darkPrimary)),
+              foregroundColor: const WidgetStatePropertyAll<Color>(
+                  AppColors.darkPrimaryBackground),
+              backgroundColor:
+                  const WidgetStatePropertyAll<Color>(AppColors.darkPrimary)),
         ),
         listTileTheme: const ListTileThemeData(
           iconColor: AppColors.darkPrimary,
@@ -66,18 +73,16 @@ class CustomThemeData {
         ),
         menuTheme: const MenuThemeData(
             style: MenuStyle(
-          backgroundColor: WidgetStatePropertyAll<Color>(AppColors.darkSecondaryBackground),
+          backgroundColor:
+              WidgetStatePropertyAll<Color>(AppColors.darkSecondaryBackground),
         )),
         menuButtonTheme: MenuButtonThemeData(
-          style: ButtonStyle(
-            textStyle: WidgetStateProperty.all(
-              GoogleFonts.montserratAlternates(
-                fontSize: 16,
-                fontWeight: FontWeight.w600
-              ),
-            ),
-            foregroundColor: const WidgetStatePropertyAll<Color>(AppColors.text)
-          )
-        ));
+            style: ButtonStyle(
+                textStyle: WidgetStateProperty.all(
+                  GoogleFonts.montserratAlternates(
+                      fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                foregroundColor:
+                    const WidgetStatePropertyAll<Color>(AppColors.text))));
   }
 }

@@ -75,11 +75,12 @@ class _ProfileState extends State<Profile> {
             padding: const EdgeInsets.only(left: 16, bottom: 24, right: 16),
             child: SizedBox(
               width: double.infinity,
-              child:
-                  ElevatedButton(onPressed: () {
+              child: ElevatedButton(
+                  onPressed: () {
                     FirebaseAuth.instance.signOut();
                     SystemNavigator.pop();
-                  }, child: const Text("Вихід")),
+                  },
+                  child: const Text("Вихід")),
             ),
           )
         ],

@@ -1,14 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class HistoryData{
-
+class HistoryData {
   final uid = FirebaseAuth.instance.currentUser!.uid;
 
-
-  Future<void> setHistory(String pizzaName, String pizzaId, String orderAmount) async {
-    DocumentReference newCityRef = FirebaseFirestore.instance.collection("orderHistory").doc();
-    newCityRef.set({'pizzaName': pizzaName, 'pizza_id': pizzaId, "uid": uid, "orderStatus": true, "cookingStatus": false, "orderAmount": orderAmount, "id": newCityRef.id});
+  Future<void> setHistory(
+      String pizzaName, String pizzaId, String orderAmount) async {
+    DocumentReference newCityRef =
+        FirebaseFirestore.instance.collection("orderHistory").doc();
+    newCityRef.set({
+      'pizzaName': pizzaName,
+      'pizza_id': pizzaId,
+      "uid": uid,
+      "orderStatus": true,
+      "cookingStatus": false,
+      "orderAmount": orderAmount,
+      "id": newCityRef.id
+    });
     return;
   }
 
@@ -26,5 +34,4 @@ class HistoryData{
     FirebaseFirestore.instance.collection('orderHistory').doc(id).delete();
     return;
   }
-
 }

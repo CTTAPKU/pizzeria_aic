@@ -7,7 +7,11 @@ class PizzaCard extends StatelessWidget {
   final String pictureURL;
   final String id;
 
-  const PizzaCard({super.key, required this.pizzaName, required this.pictureURL, required this.id});
+  const PizzaCard(
+      {super.key,
+      required this.pizzaName,
+      required this.pictureURL,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,8 @@ class PizzaCard extends StatelessWidget {
                     bottom: 16,
                     child: Text(
                       pizzaName,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 24),
                     ),
                   )
                 ],

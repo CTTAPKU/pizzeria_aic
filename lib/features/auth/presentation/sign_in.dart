@@ -10,7 +10,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 

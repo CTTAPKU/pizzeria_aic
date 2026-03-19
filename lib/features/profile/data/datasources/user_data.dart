@@ -7,6 +7,4 @@ class UserData {
     final users = await usersStore.where("uid", isEqualTo: uid).get();
     return users.docs.first.data();
   }
-
-
 }
