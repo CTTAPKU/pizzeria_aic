@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "318260814572",
     "project_id": "pizzeria-bd5e8",
-    "storage_bucket": "pizzeria-bd5e8.appspot.com"
+    "storage_bucket": "pizzeria-bd5e8.firebasestorage.app"
   },
   "client": [
     {
@@ -12,7 +12,20 @@
           "package_name": "com.example.pizzeria_aic"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "318260814572-gsrqg771aqltk6us0sg803jjnf0g7eo8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pizzeria_aic",
+            "certificate_hash": "26bf93e0fbf781e4b7aff8b71eb391b5f86048b3"
+          }
+        },
+        {
+          "client_id": "318260814572-03eus90ja2g2amjljl6hhrtreu770vam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyC7gDhCsD1dIg4nVbUhGgKA35BCtem4R50"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318260814572-03eus90ja2g2amjljl6hhrtreu770vam.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

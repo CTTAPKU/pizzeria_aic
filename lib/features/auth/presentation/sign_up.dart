@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pizzeria_aic/features/auth/data/datasources/auth_service.dart';
+import 'package:pizzeria_aic/features/auth/data/datasources/remote_datasource.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUp extends StatefulWidget {
@@ -176,19 +176,18 @@ class _SignUpState extends State<SignUp> {
                         firstNameController.text.isNotEmpty &&
                         lastNameController.text.isNotEmpty &&
                         phoneNumberController.text.isNotEmpty) {
-                      await AuthService().signUP(
+                      await AuthRemoteDataSource().signUP(
                         email: emailController.text,
                         password: passwordController.text,
-                        context: context,
                         firstName: firstNameController.text,
                         lastName: lastNameController.text,
                         phoneNumber: phoneNumberController.text,
                       );
                       await Future.delayed(const Duration(seconds: 1));
-                      AuthService().signIN(
-                          email: emailController.text,
-                          password: passwordController.text,
-                          context: context);
+                      AuthRemoteDataSource().signIN(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      );
                     } else {
                       Fluttertoast.showToast(
                         msg: "Введіть дані у всі поля",

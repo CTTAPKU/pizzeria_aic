@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pizzeria_aic/features/auth/data/datasources/auth_service.dart';
+import 'package:pizzeria_aic/features/auth/data/datasources/remote_datasource.dart';
 import 'package:pizzeria_aic/features/auth/presentation/sign_up.dart';
 
 class SignIn extends StatefulWidget {
@@ -97,10 +97,10 @@ class _SignInState extends State<SignIn> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    AuthService().signIN(
-                        email: emailController.text,
-                        password: passwordController.text,
-                        context: context);
+                    AuthRemoteDataSource().signIN(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    );
                   },
                   child: const Text("Увійти"),
                 ),
