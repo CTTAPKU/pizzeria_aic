@@ -1,52 +1,79 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pizzeria_aic/features/auth/data/models/user_model.dart';
 
 class AuthRemoteDataSource {
-  final FirebaseAuth authInstance = FirebaseAuth.instance;
-  final FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+  final firebase_auth.FirebaseAuth _auth = firebase_auth.FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> signUP({
+  // Stream of auth state changes (Firebase User)
+  Stream<firebase_auth.User?> get authStateChanges => _auth.authStateChanges();
+
+  firebase_auth.User? get currentUser => _auth.currentUser;
+
+  Future<firebase_auth.UserCredential> signUpWithEmail({
     required String email,
     required String password,
-    required String firstName,
-    required String lastName,
-    required String phoneNumber,
   }) async {
-    try {
-      await authInstance.createUserWithEmailAndPassword(
-          email: email, password: password);
+    return await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
 
-      CollectionReference users = firestoreInstance.collection("Users");
-      final uid = authInstance.currentUser!.uid;
-      users.add({
-        'firstName': firstName,
-        "lastName": lastName,
-        "email": email,
-        "phoneNumber": phoneNumber,
-        "uid": uid
-      });
-      return;
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-    } catch (e) {
-      print(e);
+  Future<firebase_auth.UserCredential> signInWithEmail({
+    required String email,
+    required String password,
+  }) async {
+    return await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
+
+  Future<void> deleteAccount() async {
+    final user = _auth.currentUser;
+    if (user != null) {
+      await deleteUserProfile(user.uid);
+      await user.delete();
     }
   }
 
-  Future<void> signIN({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      await authInstance.signInWithEmailAndPassword(
-          email: email, password: password);
-      return;
-    } on FirebaseAuthException catch (e) {
-      //   TODO: зробити обробку помилок
+  Future<String?> getIdToken() async {
+    return await _auth.currentUser?.getIdToken();
+  }
+
+  Future<void> createUserProfile(UserModel userModel) async {
+    await _firestore.collection('Users').doc(userModel.uid).set(userModel.toMap());
+  }
+
+  Future<void> updateUserProfile(UserModel userModel) async {
+    await _firestore.collection('Users').doc(userModel.uid).update(userModel.toMap());
+  }
+
+  Future<Map<String, dynamic>?> getUserProfile(String uid) async {
+    final doc = await _firestore.collection('Users').doc(uid).get();
+    if (doc.exists && doc.data() != null) {
+      return doc.data();
     }
+    
+    // Fallback search by query, in case the document ID is not the UID
+    final querySnapshot = await _firestore
+        .collection('Users')
+        .where('uid', isEqualTo: uid)
+        .get();
+        
+    if (querySnapshot.docs.isNotEmpty) {
+      return querySnapshot.docs.first.data();
+    }
+    return null;
+  }
+
+  Future<void> deleteUserProfile(String uid) async {
+    await _firestore.collection('Users').doc(uid).delete();
   }
 }
